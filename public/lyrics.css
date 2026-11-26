@@ -1,0 +1,89 @@
+/* SetTheCue lyrics panel — self-contained, does not rely on style.css.
+   Docked (default): sits inside the page between the now-playing card and the set list.
+   .full: covers the whole screen (stage / tablet use). */
+.lyr {
+  --lyr-size: 56px;
+  position: relative;
+  height: 46vh; min-height: 260px;
+  margin: 12px 0;
+  border: 1px solid #2a2a2e; border-radius: 16px; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: #000; color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.lyr.editing { height: 72vh; }
+.lyr.full {
+  position: fixed; inset: 0; z-index: 1000;
+  height: auto; min-height: 0; margin: 0; border: 0; border-radius: 0;
+}
+.lyr[hidden] { display: none; }
+.lyr button {
+  font: inherit; color: #ddd; background: #1c1c1e; border: 1px solid #333;
+  border-radius: 10px; padding: 6px 12px; cursor: pointer;
+}
+.lyr button:hover { background: #2a2a2d; }
+.lyr button.primary { background: #2f7cff; border-color: #2f7cff; color: #fff; }
+.lyr-bar, .lyr-ed-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #1f1f22;
+}
+.lyr.full .lyr-bar { padding: 10px 16px; padding-top: max(10px, env(safe-area-inset-top)); }
+.lyr-title { font-size: 16px; font-weight: 600; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lyr-tools { display: flex; gap: 8px; flex-shrink: 0; }
+.lyr-view {
+  flex: 1; overflow-y: auto; padding: 18vh 16px; text-align: center;
+  scroll-behavior: smooth;
+}
+.lyr.full .lyr-view { padding: 40vh 24px; }
+.lyr-line {
+  font-size: calc(var(--lyr-size) * .6); line-height: 1.25; font-weight: 700;
+  margin: .25em 0; color: #555; opacity: .55;
+  transition: color .2s, opacity .2s, transform .2s;
+}
+.lyr.full .lyr-line { font-size: var(--lyr-size); }
+.lyr-line.next { color: #999; opacity: .9; }
+.lyr-line.cur { color: #fff; opacity: 1; transform: scale(1.04); }
+.lyr-line.lyr-empty { color: #777; font-size: 18px; font-weight: 500; padding: 0 12px; }
+.lyr-editor { position: absolute; inset: 0; background: #0b0b0c; display: flex; flex-direction: column; }
+.lyr-editor[hidden] { display: none; }
+#lyr-ed-hint { color: #9a9a9f; font-size: 13px; flex: 1; }
+#lyr-text {
+  flex: 1; resize: none; border: 0; outline: 0; padding: 14px;
+  background: #0b0b0c; color: #eee; font: 16px/1.5 ui-monospace, Menlo, monospace;
+}
+#lyr-mark { flex: 1; overflow-y: auto; padding: 10px 12px; }
+#lyr-mark[hidden], #lyr-text[hidden] { display: none; }
+.mk-line { display: flex; gap: 12px; padding: 6px 10px; border-radius: 8px; font-size: 18px; cursor: pointer; color: #bbb; }
+.mk-line .b { min-width: 56px; text-align: right; color: #2f7cff; font-variant-numeric: tabular-nums; }
+.mk-line.unset .b { color: #555; }
+.mk-line.ptr { background: #1d2a44; color: #fff; outline: 1px solid #2f7cff; }
+
+.lyr-view { scroll-behavior: auto !important; }
+
+/* nama bagian / locator di dalam lirik */
+.lyr-sec {
+  color: #ffd60a; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  font-size: calc(var(--lyr-size) * .3); margin: 1em 0 .15em;
+}
+.lyr.full .lyr-sec { font-size: calc(var(--lyr-size) * .4); }
+
+/* lyrics window: no visible scrollbar, smaller default text (A- / A+ still adjust it) */
+.lyr-view { scrollbar-width: none; }
+.lyr-view::-webkit-scrollbar { display: none; }
+body.lyr-standalone .lyr-line:not(.lyr-empty) { font-size: calc(var(--lyr-size) * .6); }
+body.lyr-standalone .lyr-sec { font-size: calc(var(--lyr-size) * .3); }
+
+/* bagian instrumental: titik penghitung bar */
+.lyr-inst {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: .35em .5em; margin: .2em 0 .6em; font-size: calc(var(--lyr-size) * .45);
+}
+.lyr-inst i {
+  display: inline-block; box-sizing: border-box; width: .45em; height: .45em; border-radius: 50%;
+  border: .08em solid currentColor; opacity: .5; transition: transform .15s;
+}
+.lyr-inst i.done { background: currentColor; opacity: .35; }
+.lyr-inst i.now { background: currentColor; opacity: 1; transform: scale(1.4); }
+.lyr-inst .n { font-size: .7em; color: currentColor; opacity: .85; margin-left: .7em; letter-spacing: .05em; }
+.lyr.full .lyr-inst { font-size: calc(var(--lyr-size) * .55); }

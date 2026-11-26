@@ -1,0 +1,33 @@
+/* SetTheCue Ready check */
+.rc {
+  display: flex; align-items: center; gap: 10px;
+  margin: 10px 0; padding: 8px 12px; border-radius: 14px;
+  background: #101113; border: 1px solid #2a2a2e; color: #e8e8ea;
+}
+.rc-title { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #7d828c; }
+.rc-icons { display: flex; gap: 10px; margin-left: auto; }
+.rc-ic {
+  position: relative; width: 38px; height: 38px; border-radius: 11px; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 17px; font-family: inherit;
+}
+.rc-ic.ok { background: #123826; color: #3ddc97; }
+.rc-ic.warn { background: #3a2e0c; color: #ffc53d; }
+.rc-ic.bad { background: #3a1416; color: #ff6b6b; }
+.rc-bd {
+  position: absolute; right: -4px; bottom: -4px; width: 16px; height: 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 9px; border: 2px solid #101113;
+}
+.rc-ic.ok .rc-bd { background: #3ddc97; color: #06210f; }
+.rc-ic.warn .rc-bd { background: #ffc53d; color: #2a1d00; }
+.rc-ic.bad .rc-bd { background: #ff6b6b; color: #2a0505; }
+.rc-count { font-size: 13px; min-width: 92px; text-align: right; }
+.rc-count.all { color: #3ddc97; }
+.rc-count.some { color: #ffc53d; }
+
+/* ukuran ringkas */
+.rc { gap: 8px; margin: 4px 0; padding: 3px 10px; border-radius: 12px; }
+.rc-title { font-size: 11px; }
+.rc-icons { gap: 8px; }
+.rc-ic { width: 24px; height: 24px; border-radius: 7px; font-size: 12px; }
+.rc-bd { width: 11px; height: 11px; right: -3px; bottom: -3px; font-size: 7px; border-width: 1.5px; }
+.rc-count { font-size: 11px; min-width: 76px; }

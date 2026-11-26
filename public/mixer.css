@@ -1,0 +1,69 @@
+/* SetTheCue mixer panel (self-contained) */
+.mx {
+  margin: 12px 0; padding: 10px 12px 12px; border-radius: 16px;
+  background: #101113; border: 1px solid #2a2a2e; color: #e8e8ea;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.mx-head { display: flex; align-items: center; gap: 8px; }
+.mx-title { font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #9a9fa8; flex: 1; }
+.mx-btn {
+  font: inherit; font-size: 12px; font-weight: 700; color: #cfd2d8; background: #1b1c20;
+  border: 1px solid #2f3138; border-radius: 9px; padding: 6px 10px; cursor: pointer;
+}
+.mx-btn:hover { background: #24262b; }
+.mx-btn kbd {
+  font: 10px ui-monospace, Menlo, monospace; color: #7d828c; margin-left: 5px;
+  border: 1px solid #2f3138; border-radius: 4px; padding: 0 4px;
+}
+.mx-btn.on { background: #1f6b3a; border-color: #2a8a4c; color: #fff; }
+.mx-btn.lock.on { background: #7a5a08; border-color: #b8890f; color: #ffe08a; }
+.mx-btn.warn { background: #7a1f1f; border-color: #b03a3a; color: #fff; }
+.mx-body[hidden] { display: none; }
+.mx-note { color: #7d828c; font-size: 13px; padding: 14px 4px; text-align: center; }
+.mx-cols { display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+.mx-col { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+.mx-led { width: 10px; height: 10px; border-radius: 50%; background: #26282d; transition: background .08s, box-shadow .08s; }
+.mx-led.on { background: #4ade80; box-shadow: 0 0 8px #4ade80; }
+.mx-fader { position: relative; width: 44px; height: 150px; cursor: ns-resize; touch-action: none; user-select: none; }
+.mx-fader::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; margin-left: -3px; border-radius: 3px; background: #26282d; }
+.mx-fill { position: absolute; left: 50%; bottom: 0; width: 6px; margin-left: -3px; border-radius: 3px; background: #2f7cff; }
+.mx-zero { position: absolute; left: 6px; right: 6px; height: 0; border-top: 1px dashed #5c6068; }
+.mx-thumb {
+  position: absolute; left: 4px; right: 4px; height: 14px; margin-bottom: -7px; border-radius: 5px;
+  background: #e8e8ea; border: 1px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.6);
+}
+.mx.locked .mx-fader { opacity: .45; cursor: not-allowed; }
+.mx-db { font: 600 12px ui-monospace, Menlo, monospace; color: #cfd2d8; }
+.mx-ms { display: flex; gap: 4px; }
+.mx-ms button {
+  width: 26px; height: 26px; border-radius: 7px; font: 700 12px inherit; cursor: pointer;
+  color: #9a9fa8; background: #1b1c20; border: 1px solid #2f3138; padding: 0;
+}
+.mx-ms .m.on { background: #ff9f0a; border-color: #ff9f0a; color: #1a1000; }
+.mx-ms .s.on { background: #ffd60a; border-color: #ffd60a; color: #1a1400; }
+.mx.locked .mx-ms button { opacity: .5; }
+.mx-name { max-width: 100%; font-size: 11px; font-weight: 600; color: #aeb3bc; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mx-name b { color: #6f747d; margin-right: 3px; }
+.mx-foot { display: flex; align-items: center; justify-content: flex-end; margin-top: 10px; }
+@media (pointer: coarse) { .mx-btn kbd, .mx-name b { display: none; } .mx-fader { height: 170px; } }
+
+/* channel colors + rename dialog (update #2) */
+.mx-dlg { position: fixed; inset: 0; z-index: 1100; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.6); }
+.mx-dlg[hidden] { display: none; }
+.mx-dbox { width: min(340px, 92vw); padding: 16px; border-radius: 16px; background: #17181b; border: 1px solid #2f3138; color: #e8e8ea; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+.mx-dbox h3 { margin: 0 0 4px; font-size: 16px; }
+.mx-orig { font-size: 12px; color: #7d828c; margin-bottom: 10px; }
+.mx-dbox input { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; font-size: 16px; color: #fff; background: #0e0f11; border: 1px solid #2f3138; border-radius: 10px; outline: none; }
+.mx-dbox input:focus { border-color: #2f7cff; }
+.mx-sw { display: grid; grid-template-columns: repeat(9, 1fr); gap: 6px; margin: 14px 0; }
+.mx-swatch { aspect-ratio: 1; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; }
+.mx-swatch.sel { border-color: #fff; box-shadow: 0 0 0 2px #17181b inset; }
+.mx-dact { display: flex; gap: 8px; align-items: center; }
+.mx-col .mx-fill { background: var(--c, #2f7cff); }
+.mx-col .mx-thumb { border: 2px solid var(--c, #fff); }
+.mx-name { cursor: pointer; border-bottom: 2px solid var(--c, transparent); padding-bottom: 2px; }
+.mx-name:hover { color: #fff; }
+
+/* tombol simbol (metronom, kunci, lipat) */
+.mx { padding: 6px 10px 10px; }
+.mx-sq { width: 30px; height: 30px; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; border-radius: 9px; }

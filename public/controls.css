@@ -1,0 +1,43 @@
+/* SetTheCue focus banner + on-screen transport buttons (self-contained) */
+#focus-root[hidden] { display: none; }
+.fb {
+  display: flex; align-items: center; gap: 10px;
+  margin: 8px 0; padding: 8px 14px; border-radius: 12px;
+  font-size: 13px; font-weight: 600; border: 1px solid transparent;
+}
+.fb-dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.fb.on { background: #10301d; color: #4ade80; border-color: #1f6b3a; }
+.fb.off { background: #3a2e08; color: #ffd60a; border-color: #7a6410; }
+.fb.paused { background: #1d1f24; color: #9aa0aa; border-color: #2c2f36; }
+.fb button {
+  display: none; margin-left: auto; font: inherit; font-size: 12px; font-weight: 700;
+  color: #1a1400; background: #ffd60a; border: 0; border-radius: 8px; padding: 5px 12px; cursor: pointer;
+}
+.fb.off button { display: inline-block; }
+
+.tp { display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 10px; margin: 12px 0; }
+.tp-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  min-height: 64px; padding: 8px 6px; border-radius: 14px; cursor: pointer;
+  font: inherit; font-size: 14px; font-weight: 600;
+  color: #e8e8ea; background: #17181b; border: 1px solid #2c2f36;
+}
+.tp-btn:hover { background: #202226; }
+.tp-btn:active { transform: scale(.98); }
+.tp-btn i { font-size: 20px; }
+.tp-main { background: #1f6b3a; border-color: #2a8a4c; color: #fff; }
+.tp-main:hover { background: #247a43; }
+.tp-btn kbd {
+  font: 11px ui-monospace, Menlo, monospace; color: #8a8f99;
+  background: #0e0f11; border: 1px solid #2c2f36; border-radius: 5px; padding: 1px 6px;
+}
+.tp-main kbd { color: #cfeedd; background: #165029; border-color: #2a8a4c; }
+@media (pointer: coarse) { .tp-btn kbd { display: none; } }
+
+/* ukuran ringkas */
+.tp { gap: 8px; margin: 8px 0; }
+.tp-btn {
+  flex-direction: row; gap: 6px; min-height: 36px; padding: 4px 6px; border-radius: 11px; font-size: 13px;
+  white-space: nowrap; overflow: hidden;
+}
+.tp-btn i { font-size: 15px; }

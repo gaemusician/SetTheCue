@@ -1,0 +1,19 @@
+/* SetTheCue Band: baris pemilih band di bawah top bar */
+.bd { display: flex; gap: 8px; align-items: stretch; }
+.bd-sel {
+  position: relative; flex: 1; display: flex; align-items: center;
+  background: var(--card-2); border: 1px solid var(--border); border-radius: 10px;
+  transition: border-color 0.15s ease;
+}
+.bd-sel:hover { border-color: var(--muted); }
+.bd-sel i { position: absolute; left: 12px; color: var(--faint); font-size: 13px; pointer-events: none; }
+.bd-sel select {
+  width: 100%; padding: 10px 10px 10px 34px; background: transparent; border: none;
+  color: var(--text); font: 700 14px/1 var(--display); cursor: pointer;
+}
+.bd-sel select option { background: var(--card); }
+.bd .icon-btn { width: 38px; height: auto; border-radius: 10px; }
+.bd .icon-btn:disabled { opacity: 0.3; cursor: default; }
+.bd-note { margin: 6px 2px 0; font: 500 12px/1.3 var(--ui); color: var(--faint); }
+.bd-note.ok { color: var(--accent); }
+.bd-note.warn { color: #ffb020; }

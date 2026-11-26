@@ -1,0 +1,31 @@
+/* SetTheCue: warna judul bar (palet C, neon kontras tinggi).
+   Dimuat paling akhir di index.html supaya menimpa warna bawaan.
+   Mau ganti warna? Ubah nilai di :root ini saja. */
+:root {
+  --t-stage: #00e5ff;   /* DI PANGGUNG */
+  --t-ready: #7c8cff;   /* READY CHECK */
+  --t-paused: #ff5c8a;  /* PAUSED / status lagu */
+  --t-now: #b6ff3b;     /* judul lagu yang sedang dimainkan */
+  --t-upnext: #ffb020;  /* label UP NEXT */
+  --t-next: #ff7bd5;    /* judul lagu berikutnya */
+  --t-mixer: #ff9f43;   /* MIXER */
+}
+
+.tm .tm-label { color: var(--t-stage); }
+.rc .rc-title { color: var(--t-ready); }
+.mx-title { color: var(--t-mixer); }
+
+.np .eyebrow.live-dot { color: var(--t-paused); }
+.np .eyebrow.live-dot::before { background: var(--t-paused); }
+body.is-playing .np .eyebrow.live-dot,
+body.is-looping .np .eyebrow.live-dot { color: var(--t-now); }
+body.is-playing .np .eyebrow.live-dot::before,
+body.is-looping .np .eyebrow.live-dot::before { background: var(--t-now); }
+
+.np .now-title { color: var(--t-now); font-size: 26px; }
+.np .progress .fill { background: var(--t-now); }
+.np .time .countdown { color: var(--t-now); }
+
+.up-next .eyebrow { color: var(--t-upnext); }
+.up-next.end-of-set .eyebrow { color: var(--t-upnext); }
+.up-next #next-title { color: var(--t-next); font-weight: 600; }
